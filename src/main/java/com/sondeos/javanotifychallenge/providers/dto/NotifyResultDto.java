@@ -5,6 +5,9 @@ public class NotifyResultDto {
     String status;
     String uuid;
 
+    public NotifyResultDto(String error, String s) {
+    }
+
 
     public String getStatus() {
         return status;

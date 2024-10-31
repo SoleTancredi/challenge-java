@@ -1,5 +1,6 @@
 package com.sondeos.javanotifychallenge.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public class NotificationRepository {
                createNotification("25", "email", "Keep participating in the Java Notify Challenge!"),
                createNotification("15", "sms", "Hello from Java Notify Challenge!"),
                createNotification("25", "email", "Enjoy the Java Notify Challenge!"),
-               createNotification("17", "email", "Great progress in the Java Notify Challenge!"),
+              // createNotification("17", "email", "Great progress in the Java Notify Challenge!"),
                createNotification("14", "sms", "A quick update from Java Notify Challenge!"),
                createNotification("15", "email", "Great progress in the Java Notify Challenge!"),
                createNotification("14", "sms", "Keep participating in the Java Notify Challenge!"),
@@ -55,7 +56,7 @@ public class NotificationRepository {
                createNotification("16", "email", "Good morning from Java Notify Challenge!"),
                createNotification("19", "email", "Your updates from Java Notify Challenge!"),
                createNotification("23", "email", "Keep participating in the Java Notify Challenge!"),
-               createNotification("46", "email", "Hi from Java Notify Challenge!"),
+              // createNotification("46", "email", "Hi from Java Notify Challenge!"),
                createNotification("2", "sms", "Good morning from Java Notify Challenge!"),
                createNotification("13", "sms", "Thanks for staying with the Java Notify Challenge!"),
                createNotification("1", "email", "Welcome to Java Notify Challenge!"),
@@ -219,5 +220,4 @@ public class NotificationRepository {
                createNotification("9", "sms", "We hope you enjoy the Java Notify Challenge!")
                );
    }
-
 }
