@@ -3,22 +3,30 @@ package com.sondeos.javanotifychallenge.providers.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class ContactDto {
     @NotNull
     String id;
+    @NotNull
+    @Size(min = 2, max = 50, message = "The name must be between 1 and 50 characters..")
     String name;
+    @NotNull
+    @Size(min = 2, max = 50, message = "The last name must be between 1 and 50 characters.")
     String surname;
 
+    @NotNull
+    @Email(message = "The email does not have a valid format.")
     @Pattern(
             regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-            message = "El email no tiene un formato válido."
+            message = "The email does not have a valid format."
     )
     private String email;
 
+    @NotNull
     @Pattern(
             regexp = "^\\d{11}$",
-            message = "El número de teléfono debe contener exactamente 11 dígitos."
+            message = "The telephone number must contain exactly 11 digits."
     )
     private String phoneNumber;
 

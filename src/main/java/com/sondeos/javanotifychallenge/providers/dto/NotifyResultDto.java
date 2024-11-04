@@ -1,9 +1,11 @@
 package com.sondeos.javanotifychallenge.providers.dto;
 
+
 public class NotifyResultDto {
 
+
     String status;
-    String uuid;
+    String id;
 
     public NotifyResultDto(String error, String s) {
     }
@@ -17,18 +19,18 @@ public class NotifyResultDto {
         this.status = status;
     }
 
-    public String getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String toString() {
         return "NotifyResult: {" +
                 "status='" + status + '\'' +
-                ", uuid='" + uuid + '\'' +
+                ", id='" + id + '\'' +
                 '}';
     }
 }
