@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+//DTO: este patron se usa para transferir datos entre diferentes capas de una aplicacion.
+//reduccion de informacion, mayor seguridad, optimizacion de rendimiento, independencia de la estructura interna
+//facilidad de mantenimiento
 public class ContactDto {
     @NotNull
     String id;

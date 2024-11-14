@@ -31,30 +31,30 @@ public class NotifyServiceImpl implements NotifyService{
      */
     public NotificationProcessResult processNotifications() {
         //Inicializamos pool de hilos
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+            ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-        // Iniciamos contador de tiempo
-        long startTime = System.currentTimeMillis();
+            // Iniciamos contador de tiempo
+            long startTime = System.currentTimeMillis();
 
-        // Iniciamos contador de notificaciones procesadas
-        AtomicInteger processed = new AtomicInteger();
+            // Iniciamos contador de notificaciones procesadas
+            AtomicInteger processed = new AtomicInteger();
 
-        // Iniciamos contador de notificaciones enviadas
-        AtomicInteger sent = new AtomicInteger();
+            // Iniciamos contador de notificaciones enviadas
+            AtomicInteger sent = new AtomicInteger();
 
-        // Pedimos las notificaciones y las recorremos para enviarlas
-        NotificationRepository.getNotifications().forEach(n -> executorService.submit(() -> {
-            // Procesamos cada notificación
-            Boolean r = this.dispatchNotification(n.get("type"), n.get("contactId"), n.get("message"));
+            // Pedimos las notificaciones y las recorremos para enviarlas
+            NotificationRepository.getNotifications().forEach(n -> executorService.submit(() -> {
+                // Procesamos cada notificación
+                Boolean r = this.dispatchNotification(n.get("type"), n.get("contactId"), n.get("message"));
 
-            // Incrementamos el contador de notificaciones procesadas
-            processed.getAndIncrement();
+                // Incrementamos el contador de notificaciones procesadas
+                processed.getAndIncrement();
 
-            // Incrementamos el contador de notificaciones enviadas si el resultado fue exitoso
-            if (r) {
-                sent.getAndIncrement();
-            }
-        }));
+                // Incrementamos el contador de notificaciones enviadas si el resultado fue exitoso
+                if (r) {
+                    sent.getAndIncrement();
+                }
+            }));
 
         executorService.shutdown();
 
@@ -110,12 +110,13 @@ public class NotifyServiceImpl implements NotifyService{
     private Boolean send(String type, ContactDto contactDto, String message) {
         if (type.equals("email")) {
            emailProvider.notify(contactDto.getEmail(), message);
+           return true;
         } else if (type.equals("sms")) {
            smsProvider.notify(contactDto.getPhoneNumber(), message);
+           return true;
         } else {
             System.out.println("Type unknown: " + type);
             return false;
         }
-        return true;
     }
 }
