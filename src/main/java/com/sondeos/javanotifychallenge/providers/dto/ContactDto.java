@@ -9,28 +9,15 @@ import jakarta.validation.constraints.Size;
 //reduccion de informacion, mayor seguridad, optimizacion de rendimiento, independencia de la estructura interna
 //facilidad de mantenimiento
 public class ContactDto {
-    @NotNull
-    String id;
-    @NotNull
-    @Size(min = 2, max = 50, message = "The name must be between 1 and 50 characters..")
-    String name;
-    @NotNull
-    @Size(min = 2, max = 50, message = "The last name must be between 1 and 50 characters.")
-    String surname;
 
-    @NotNull
-    @Email(message = "The email does not have a valid format.")
-    @Pattern(
-            regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-            message = "The email does not have a valid format."
-    )
+    private String id;
+
+    private String name;
+
+    private String surname;
+
     private String email;
 
-    @NotNull
-    @Pattern(
-            regexp = "^\\d{11}$",
-            message = "The telephone number must contain exactly 11 digits."
-    )
     private String phoneNumber;
 
     public String getId() {

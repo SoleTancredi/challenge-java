@@ -8,6 +8,7 @@ import com.sondeos.javanotifychallenge.services.dto.NotificationProcessResult;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutorService;
@@ -21,10 +22,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class NotifyServiceImpl implements NotifyService{
     @Autowired
     ContactProvider contactProvider;
+
     @Autowired
     EmailProvider emailProvider;
     @Autowired
     SmsProvider smsProvider;
+
 
     /*
      * Procesa todas las notificaciones y devuelve un objeto con el número de notificaciones procesadas, enviadas y el tiempo de procesamiento
@@ -107,16 +110,40 @@ public class NotifyServiceImpl implements NotifyService{
     }
 
     //Logica envios
-    private Boolean send(String type, ContactDto contactDto, String message) {
-        if (type.equals("email")) {
-           emailProvider.notify(contactDto.getEmail(), message);
-           return true;
-        } else if (type.equals("sms")) {
-           smsProvider.notify(contactDto.getPhoneNumber(), message);
-           return true;
-        } else {
-            System.out.println("Type unknown: " + type);
-            return false;
+    public Boolean send(String type, ContactDto contactDto, String message) {
+        if(messageSizeValidation(message)){
+            switch (type) {
+                case "email":
+                    if (emailValidation(contactDto.getEmail())) {
+                        emailProvider.notify(contactDto.getEmail(), message);
+                        return true;
+                    }
+                    break;
+                case "sms":
+                    if (phoneValidation(contactDto.getPhoneNumber())) {
+                        smsProvider.notify(contactDto.getPhoneNumber(), message);
+                        return true;
+                    }
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown notification type: " + type);
+            }
         }
+        System.out.println("-------------tenia mas de 140 caracteres salio del if");
+        return false;
+    }
+
+    private Boolean emailValidation(String email){
+        String expectedEmail = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        return email != null && email.matches(expectedEmail);
+    }
+
+    private Boolean phoneValidation(String phoneNumber){
+        String expectedPhoneNumber = "^\\d{11}$";
+        return phoneNumber != null && phoneNumber.matches(expectedPhoneNumber);
+    }
+
+    private Boolean messageSizeValidation(String message){
+        return message != null && message.length() <= 140;
     }
 }

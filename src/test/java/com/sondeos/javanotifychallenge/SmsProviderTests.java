@@ -47,9 +47,4 @@ class SmsProviderTests {
         assertEquals(HttpStatus.BAD_REQUEST, exception.getStatusCode());
     }
 
-
-
-
-
-
 }

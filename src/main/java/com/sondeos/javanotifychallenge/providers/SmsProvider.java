@@ -1,9 +1,11 @@
 package com.sondeos.javanotifychallenge.providers;
 
 import com.sondeos.javanotifychallenge.providers.dto.NotifyPayloadDto;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
+@Qualifier("smsProvider")
 public class SmsProvider extends NotificationTemplate {
 
     @Override

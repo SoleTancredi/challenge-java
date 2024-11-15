@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClient;
 
-public abstract class NotificationTemplate {
+public abstract class NotificationTemplate{
     public NotifyResultDto notify(String destination, String message) {
         NotifyPayloadDto payload = createPayload(destination, message);
         String url = getUrl();
