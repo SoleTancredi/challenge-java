@@ -1,8 +1,6 @@
 package com.sondeos.javanotifychallenge.providers.dto;
 
-
 public class NotifyResultDto {
-
 
     String status;
     String id;
@@ -33,4 +31,5 @@ public class NotifyResultDto {
                 ", id='" + id + '\'' +
                 '}';
     }
+
 }

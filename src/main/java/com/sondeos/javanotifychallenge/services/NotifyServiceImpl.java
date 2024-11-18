@@ -1,14 +1,10 @@
 package com.sondeos.javanotifychallenge.services;
 
-import com.sondeos.javanotifychallenge.exception.ContactNotFoundException;
 import com.sondeos.javanotifychallenge.providers.*;
 import com.sondeos.javanotifychallenge.providers.dto.ContactDto;
 import com.sondeos.javanotifychallenge.repository.NotificationRepository;
 import com.sondeos.javanotifychallenge.services.dto.NotificationProcessResult;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutorService;
@@ -84,8 +80,7 @@ public class NotifyServiceImpl implements NotifyService{
      * Se pueden implementar clases, interfaces o utilidades adicionales para enviar las notificaciones
      * Debe retornar true si la notificación se envió correctamente, false en caso contrario
      */
-    @CircuitBreaker(name = "notifyServiceImpl")
-    @Retry(name = "notifyServiceImpl")
+
     public Boolean dispatchNotification(String type, String contactId, String message) {
         if (type != null && contactId != null && message != null) {
             try {
@@ -98,14 +93,11 @@ public class NotifyServiceImpl implements NotifyService{
 
                 return send(type, contactDto, message);
 
-            } catch (ContactNotFoundException e) {
-                return false;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return false;
             }
         }
-
         return false;
     }
 

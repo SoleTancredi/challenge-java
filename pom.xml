@@ -56,6 +56,8 @@
             <artifactId>resilience4j-spring-boot2</artifactId>
             <version>1.7.1</version>
         </dependency>
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cache</artifactId>
@@ -66,7 +68,19 @@
             <artifactId>caffeine</artifactId>
             <version>3.1.8</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
+            <version>3.3.4</version>
+        </dependency>
     </dependencies>
 
     <build>
